@@ -10,10 +10,11 @@ output:
 
 ## Loading and preprocessing the data
 
+setwd("~/GitHub/RepData_PeerAssessment1")
+data <- read.table(unz("activity.zip", "activity.csv"), header=T, quote="\"", sep=",")
 
-```{r}
-summary(cars)
-```
+# convert date to date data type
+data$date <- as.Date(data$date) 
 
 
 

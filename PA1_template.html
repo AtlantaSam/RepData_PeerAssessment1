@@ -70,15 +70,11 @@ img {
 
 <div id="loading-and-preprocessing-the-data" class="section level2">
 <h2>Loading and preprocessing the data</h2>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
+<p>setwd(“~/GitHub/RepData_PeerAssessment1”) data &lt;- read.table(unz(“activity.zip”, “activity.csv”), header=T, quote=“&quot;”, sep=“,”)</p>
 </div>
+<div id="convert-date-to-date-data-type" class="section level1">
+<h1>convert date to date data type</h1>
+<p>data<span class="math">\(date &lt;- as.Date(data\)</span>date)</p>
 <div id="what-is-mean-total-number-of-steps-taken-per-day" class="section level2">
 <h2>What is mean total number of steps taken per day?</h2>
 </div>
@@ -90,6 +86,7 @@ img {
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
+</div>
 </div>
 
 
