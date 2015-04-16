@@ -1,5 +1,7 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
+author: "Sam Edgemon"
+date: "April 16, 2015"
 output: 
   html_document:
     keep_md: true
@@ -7,6 +9,12 @@ output:
 
 
 ## Loading and preprocessing the data
+
+
+```{r}
+summary(cars)
+```
+
 
 
 
