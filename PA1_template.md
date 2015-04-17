@@ -16,11 +16,13 @@ activity <- read.table(unz("activity.zip", "activity.csv"), header=T, quote="\""
 activity$date <- as.Date(activity$date)
 ```
   
-#### What is mean total number of steps taken per day?
+### What is mean total number of steps taken per day?
 
 - Built dataset without missings
 - Found daily steps
-- Got mean
+- Produced Mean
+- Produced Median
+- Produced Histogram
 
 
 ```r
@@ -28,11 +30,20 @@ activity.ignore.na <- na.omit(activity)
 daily.steps <- rowsum(activity.ignore.na$steps, format(activity.ignore.na$date, '%Y-%m-%d')) 
 daily.steps <- data.frame(daily.steps) 
 names(daily.steps) <- ("steps") 
+
 mean(daily.steps$steps)
 ```
 
 ```
 ## [1] 10766.19
+```
+
+```r
+median(daily.steps$steps)
+```
+
+```
+## [1] 10765
 ```
 
 ```r
@@ -47,10 +58,52 @@ hist(daily.steps$steps,
 
 ### What is the average daily activity pattern?
 
+- load libraries
+- create a variable called interval.mean.steps
+- qplot
+- identify interval with max steps
+
+
+```r
+library(plyr)
+library(ggplot2)
+interval.mean.steps <- ddply(activity.ignore.na,~interval, summarise, mean=mean(steps))
+qplot(x=interval, y=mean, data = interval.mean.steps,  geom = "line",
+      xlab="5-Minute Interval",
+      ylab="Step Count",
+      main="Average Steps Taken - Averaged Across All Days"
+      )
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-2-1.png) 
+
+```r
+# Maximum steps occurs on this interval:
+interval.mean.steps[which.max(interval.mean.steps$mean), ]
+```
+
+```
+##     interval     mean
+## 104      835 206.1698
+```
+
 
 
 ### Imputing missing values
 
+
+```r
+# Number of Records with missing values
+activity_NA <- sum(is.na(activity))
+
+# Create a copy of the original data set - activity_i "activity impute"
+activity_i <- activity
+
+# Replace all NA steps values with the average number of steps for that interval
+which <- which(is.na(activity$steps))
+intervals <- activity[which, "interval"]
+activity_i[which, "steps"] <- interval.mean.steps[interval.mean.steps == activity[which, "interval"], "mean"]
+```
 
 
 ### Are there differences in activity patterns between weekdays and weekends?
