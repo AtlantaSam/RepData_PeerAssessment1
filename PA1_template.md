@@ -50,6 +50,7 @@ median(daily.steps$steps)
 hist(daily.steps$steps, 
      main=" ",
      breaks=10,
+     ylim=c(0, 30),
      xlab="Total Number of Steps Taken Daily")
 ```
 
@@ -103,7 +104,42 @@ activity_i <- activity
 which <- which(is.na(activity$steps))
 intervals <- activity[which, "interval"]
 activity_i[which, "steps"] <- interval.mean.steps[interval.mean.steps == activity[which, "interval"], "mean"]
+
+daily.steps <- rowsum(activity_i$steps, format(activity_i$date, '%Y-%m-%d')) 
+daily.steps <- data.frame(daily.steps) 
+names(daily.steps) <- ("steps") 
+
+hist(daily.steps$steps, 
+     main=" ",
+     breaks=10,
+     ylim=c(0, 30),
+     xlab="Total Number of Steps Taken Daily (after imputation of missing values)")
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
 
 
 ### Are there differences in activity patterns between weekdays and weekends?
+
+- build logical data frame of days
+- create a new variable called weekday
+-- assign logical values to weekday and weekend designations
+- repeat an earlier step and get averages per interval
+- create sub-plots by type 
+
+
+```r
+days <- weekdays(as.Date(activity$date)) %in% c('Saturday','Sunday')
+activity$weekday <- factor(days, labels = c("weekday", "weekend"))
+steps_per_interval_weekday_avg <- aggregate(steps ~ interval + weekday, activity, FUN = mean)
+
+g <- ggplot(steps_per_interval_weekday_avg, aes(x = interval, y = steps))
+g <- g + facet_wrap(~ weekday, ncol = 1)
+g <- g + geom_line()
+g <- g + labs(x = "Interval")
+g <- g + labs(y = "Mean Number of Steps")
+g
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
+
