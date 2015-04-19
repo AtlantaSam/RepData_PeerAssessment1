@@ -115,3 +115,4 @@ g <- g + labs(y = "Mean Number of Steps")
 g
 ```
 
+### END Peer Assessment 1
