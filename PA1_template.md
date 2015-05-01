@@ -1,7 +1,7 @@
 # Reproducible Research: Peer Assessment 1
 Sam Edgemon  
 April 16, 2015  
-
+#### Test2
 
 #### Loading and Processing the Data
 
@@ -68,6 +68,13 @@ hist(daily.steps$steps,
 ```r
 library(plyr)
 library(ggplot2)
+```
+
+```
+## Warning: package 'ggplot2' was built under R version 3.1.3
+```
+
+```r
 interval.mean.steps <- ddply(activity.ignore.na,~interval, summarise, mean=mean(steps))
 qplot(x=interval, y=mean, data = interval.mean.steps,  geom = "line",
       xlab="5-Minute Interval",

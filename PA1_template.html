@@ -68,6 +68,9 @@ img {
 </div>
 
 
+<div id="test2" class="section level4">
+<h4>Test2</h4>
+</div>
 <div id="loading-and-processing-the-data" class="section level4">
 <h4>Loading and Processing the Data</h4>
 <ul>
@@ -113,8 +116,9 @@ mean(daily.steps$steps)</code></pre>
 <li>identify interval with max steps</li>
 </ul>
 <pre class="r"><code>library(plyr)
-library(ggplot2)
-interval.mean.steps &lt;- ddply(activity.ignore.na,~interval, summarise, mean=mean(steps))
+library(ggplot2)</code></pre>
+<pre><code>## Warning: package 'ggplot2' was built under R version 3.1.3</code></pre>
+<pre class="r"><code>interval.mean.steps &lt;- ddply(activity.ignore.na,~interval, summarise, mean=mean(steps))
 qplot(x=interval, y=mean, data = interval.mean.steps,  geom = &quot;line&quot;,
       xlab=&quot;5-Minute Interval&quot;,
       ylab=&quot;Step Count&quot;,
