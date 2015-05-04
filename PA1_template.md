@@ -1,7 +1,7 @@
 # Reproducible Research: Peer Assessment 1
 Sam Edgemon  
 April 16, 2015  
-#### Test2
+#### Test3
 
 #### Loading and Processing the Data
 
